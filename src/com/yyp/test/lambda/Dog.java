@@ -16,10 +16,6 @@ public class Dog {
         this.age = age;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -39,4 +35,5 @@ public class Dog {
                 ", age=" + age +
                 '}';
     }
+
 }
