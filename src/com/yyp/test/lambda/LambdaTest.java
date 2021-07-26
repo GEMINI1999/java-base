@@ -1,7 +1,6 @@
 package com.yyp.test.lambda;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -34,7 +33,7 @@ public class LambdaTest {
         System.out.println("=====");
 
         Stream.of("a", "b", "hello")
-                .map(item-> item.toUpperCase())
+                .map(item -> item.toUpperCase())
                 .forEach(System.out::println);
         System.out.println("=====");
 
@@ -44,12 +43,70 @@ public class LambdaTest {
         System.out.println("=====");
 
         // 注意对象在使用distinct去重时需要重写equals方法
-        Stream.of(1,2,3,1,2,3)
+        Stream.of(1, 2, 3, 1, 2, 3)
                 .distinct()
                 .forEach(System.out::println);
+        System.out.println("=====");
+
+        Stream.of(1, 2, 3, 4, 5)
+                .peek(integer -> System.out.println("accept:" + integer))
+                .forEach(System.out::println);
+        System.out.println("=====");
+
+        Stream.of(1, 2, 3, 4, 5)
+                //跳了6个元素，输出空stream
+                .skip(6)
+                //跳了2个元素，输出剩下的元素
+//                .skip(2)
+                .forEach(System.out::println);
+        System.out.println("=====");
+
+        Stream.of(1, 2, 3, 4, 5)
+                //前两个元素
+//                .limit(2)
+                //全部元素
+                .limit(6)
+                .forEach(System.out::println);
+        System.out.println("=====");
+
+        Stream.of(5, 4, 3, 2, 1)
+                .sorted()
+                .forEach(System.out::println);
+        System.out.println("=====");
+
+        Stream.of(1, 2, 3, 4, 5)
+                .sorted(Comparator.reverseOrder())
+                .forEach(System.out::println);
+        System.out.println("=====");
+
+        dogList.stream().sorted(Comparator.comparing(Dog::getAge)).forEach(System.out::println);
+        System.out.println("=====");
+
+        // min中的是比较函数
+        Optional<Integer> min = Stream.of(2, 1, 3, 5, 4)
+                .min((o1, o2) -> o1 - o2);
+        System.out.println("min:" + min.get());
+        System.out.println("=====");
+
+        boolean allMatch = dogList.stream().allMatch(dog -> dog.getAge() > 2);
+        System.out.println("所有狗的年龄是否大于2:" + allMatch);
+        System.out.println("=====");
+
+        Optional<Integer> any = Stream.of(1, 2, 3, 4).findFirst();
+        System.out.println(any.get());
+        System.out.println("=====");
+
+        Dog dogs = dogList.stream().findFirst().orElse(null);
+        System.out.println(dogs);
+        System.out.println("=====");
+
+        // 都不满足条件才为true
+        boolean noneMatch = dogList.stream().noneMatch(dog -> dog.getAge() > 1);
+        System.out.println("所有狗的年龄是否都不大于1:" + allMatch);
+        System.out.println("=====");
     }
 
-    public static void print(List<Dog> list){
+    public static void print(List<Dog> list) {
         for (Dog dog : list) {
             System.out.println(dog);
         }
