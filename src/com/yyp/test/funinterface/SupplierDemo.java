@@ -9,7 +9,12 @@ import java.util.function.Supplier;
  */
 public class SupplierDemo {
     public static int getValue(Supplier<Integer> sup){
-        return sup.get();
+        try {
+            return sup.get();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return -1;
     }
 
     public static void main(String[] args) {

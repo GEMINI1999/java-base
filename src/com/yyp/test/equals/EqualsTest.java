@@ -22,6 +22,8 @@ public class EqualsTest {
         // true
         System.out.println(new Long(0).equals(0L));
 
+        System.out.println(new Long(500).equals(500));
+
         System.out.println("===========================");
 
         /**
